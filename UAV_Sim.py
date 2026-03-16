@@ -54,7 +54,7 @@ def run_simulation():
     guidance = GuidanceSystem(waypoints, loiter_center, loiter_radius)
 
     # Wind Model: mean + Dryden turbulance (MIL-HDBK-1797)
-    mean_wind_ned_vector = np.array([-15.0, -15.0, 0.0]) # ~30 mph from NE -> SW in ft/s
+    mean_wind_ned_vector = np.array([-15.0, -15.0, 0.0]) # ~10 mph from NE -> SW in ft/s
     dryden = DrydenWindModel(dt=dt, sigma=4.5, L=1750.0, seed=42) # Moderate turbulence
 
     # Altitude rate limiter: realistic climb rate to prevent the controller from panicking at large errors
