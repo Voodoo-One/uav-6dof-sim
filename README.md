@@ -35,7 +35,7 @@ The project is split into eight modules with clean separation between layers:
 
 **Quaternion attitude representation.** The EOM and EKF both use quaternions instead of Euler angles to avoid gimbal lock. Attitude is maintained as a unit quaternion throughout; normalization is enforced after every integration step.
 
-**Cascaded PID with altitude-aware trim feedforward.** The autopilot uses separate inner/outer loops for both longitudinal and lateral channels. Trim values are solved numerically at the initial flight altitude using ISA density rather than sea-level defaults — at 7,000–13,000 ft, density is 19–33% below sea level, which introduces a meaningful feedforward error if ignored.
+**Cascaded PID with altitude-aware trim feedforward.** The autopilot uses separate inner/outer loops for both longitudinal and lateral channels. Trim values are solved numerically at the initial flight altitude using ISA density rather than sea-level defaults, since at 7,000–13,000 ft, density is 19–33% below sea level, which introduces a meaningful feedforward error if ignored.
 
 **Two anti-windup strategies.** Inner loops (pitch, roll, speed) use back-calculation anti-windup, appropriate when proportional gain keeps output near the saturation limit. The altitude outer loop uses conditional integration, back-calculation over-unwinds the integrator during multi-thousand-foot climbs because `kp × large error` produces an unsaturated output hundreds of times larger than the limit. The sign correction divides by `ki` to handle negative gains correctly, which standard textbook formulations omit.
 
